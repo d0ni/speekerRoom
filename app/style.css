@@ -70,3 +70,11 @@
   margin-right: auto;
   width: auto;
 }
+
+.eventOn {
+  background-color: gray;
+}
+
+.eventOff {
+  background-color: white;
+}
