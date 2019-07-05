@@ -6,12 +6,29 @@ import DayTimes from "./dayTimes.jsx";
 require("moment/locale/ru");
 
 export default class App extends Component {
-  constructor(...args) {
-    super(...args);
-    this.state = {
-      month: moment()
-    };
-  }
+  state = {
+    month: moment(),
+    events: [
+      {
+        date: "05.07.2019",
+        room: 1,
+        times: {
+          9: false,
+          10: false,
+          11: false,
+          12: false,
+          13: false,
+          14: false,
+          15: false,
+          16: false,
+          17: false,
+          18: false
+        }
+      }
+    ]
+  };
+
+  setEvent = t => () => {};
 
   weekBack() {
     this.setState({ month: moment(this.state.month).add(-7, "days") });

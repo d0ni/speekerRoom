@@ -22,33 +22,28 @@ export default class DayTimes extends Component {
       arr.push(date);
       localStorage.setItem("events", JSON.stringify(arr));
     }
-
-    console.log(arr.indexOf(date));
   };
 
-  isEvent(h) {
-    this.props.date.hour(h);
-    this.props.date.minute(0);
-    this.props.date.second(0);
+  // isEvent(h) {
+  //   this.props.date.hour(h);
+  //   this.props.date.minute(0);
+  //   this.props.date.second(0);
 
-    const arr = JSON.parse(localStorage.getItem("events"));
-    console.log(arr);
-    console.log(arr.indexOf(this.props.date.format("HH-DD-MM-YYYY")));
-    // arr.indexOf(this.props.date.format("HH-DD-MM-YYYY"));
-    if (arr.indexOf(this.props.date.format("HH-DD-MM-YYYY")) >= 0) {
-      return "eventOn";
-    }
-    return "eventOff";
-  }
+  //   const arr = JSON.parse(localStorage.getItem("events"));
+  //   console.log(arr);
+  //   console.log(arr.indexOf(this.props.date.format("HH-DD-MM-YYYY")));
+  //   // arr.indexOf(this.props.date.format("HH-DD-MM-YYYY"));
+  //   if (arr.indexOf(this.props.date.format("HH-DD-MM-YYYY")) >= 0) {
+  //     return "eventOn";
+  //   }
+  //   return "eventOff";
+  // }
 
   render() {
     return (
       <div className="day-times">
         <p className="btn-line">
-          <button
-            className={"btn-time " + this.isEvent.bind(this, 9)}
-            onClick={this.timeClick(9)}
-          >
+          <button className="btn-time" onClick={this.timeClick(9)}>
             9:00
           </button>
           <button className="btn-time" onClick={this.timeClick(14)}>
