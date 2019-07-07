@@ -44,10 +44,62 @@ export default class App extends Component {
     this.setState({ isPopup: !this.state.isPopup });
   };
 
+  daysBlock = value => {
+    const { month } = this.state;
+    const dayShift = parseInt(moment(month).format("d"));
+
+    return (
+      <div key={Math.random()} className="days">
+        {moment(month)
+          .add(value - dayShift, "days")
+          .format("DD dddd")}
+      </div>
+    );
+  };
+
+  roomsBlock = value => {
+    const { month } = this.state;
+    const dayShift = parseInt(moment(month).format("d"));
+
+    return (
+      <div key={Math.random()} className="div-room">
+        <div className="room-name">
+          <h3 className="room-color">{value[0]}</h3>
+          <h3 className="room-sum">{`(до ${value[1]} персон)`}</h3>
+        </div>
+        <DayTimes
+          date={moment(month).add(1 - dayShift, "days")}
+          room={value[2]}
+        />
+        <DayTimes
+          date={moment(month).add(2 - dayShift, "days")}
+          room={value[2]}
+        />
+        <DayTimes
+          date={moment(month).add(3 - dayShift, "days")}
+          room={value[2]}
+        />
+        <DayTimes
+          date={moment(month).add(4 - dayShift, "days")}
+          room={value[2]}
+        />
+        <DayTimes
+          date={moment(month).add(5 - dayShift, "days")}
+          room={value[2]}
+        />
+      </div>
+    );
+  };
+
   render() {
     const { month } = this.state;
-
-    const dayShift = parseInt(moment(month).format("d"));
+    const daysArr = [1, 2, 3, 4, 5];
+    const roomsArr = [
+      ["Зелёная", "5", "green"],
+      ["Красная", "15", "red"],
+      ["Синяя", "25", "blue"],
+      ["Фиолетовая", "25", "purpure"]
+    ];
 
     return (
       <div className="main-container">
@@ -65,141 +117,22 @@ export default class App extends Component {
           <h3 className="room">Комната</h3>
           <div className="caledrar-wrapper">
             <div className="month">
-              <button
+              <img
                 className="bnt-change-date"
                 onClick={this.weekBack.bind(this)}
-              >
-                left
-              </button>
+                src="icons/arrow_back.svg"
+              />
               <h2 className="curent-month">{moment(month).format("MMMM")}</h2>
-              <button
+              <img
                 className="bnt-change-date"
                 onClick={this.weekNext.bind(this)}
-              >
-                right
-              </button>
+                src="icons/arrow_forward.svg"
+              />
             </div>
-            <div className="week-days">
-              <div className="days">
-                {moment(month)
-                  .add(1 - dayShift, "days")
-                  .format("DD dddd")}
-              </div>
-              <div className="days">
-                {moment(month)
-                  .add(2 - dayShift, "days")
-                  .format("DD dddd")}
-              </div>
-              <div className="days">
-                {moment(month)
-                  .add(3 - dayShift, "days")
-                  .format("DD dddd")}
-              </div>
-              <div className="days">
-                {moment(month)
-                  .add(4 - dayShift, "days")
-                  .format("DD dddd")}
-              </div>
-              <div className="days">
-                {moment(month)
-                  .add(5 - dayShift, "days")
-                  .format("DD dddd")}
-              </div>
-            </div>
+            <div className="week-days">{daysArr.map(this.daysBlock)}</div>
           </div>
         </div>
-        <div className="div-room">
-          <div className="room-name">
-            <h3 className="room-color">Зеленая</h3>
-            <h3 className="room-sum">(до 5 персон)</h3>
-          </div>
-          <DayTimes
-            date={moment(month).add(1 - dayShift, "days")}
-            room="green"
-          />
-          <DayTimes
-            date={moment(month).add(2 - dayShift, "days")}
-            room="green"
-          />
-          <DayTimes
-            date={moment(month).add(3 - dayShift, "days")}
-            room="green"
-          />
-          <DayTimes
-            date={moment(month).add(4 - dayShift, "days")}
-            room="green"
-          />
-          <DayTimes
-            date={moment(month).add(5 - dayShift, "days")}
-            room="green"
-          />
-        </div>
-
-        <div className="div-room">
-          <div className="room-name">
-            <h3 className="room-color">Красная</h3>
-            <h3 className="room-sum">(до 15 персон)</h3>
-          </div>
-          <DayTimes date={moment(month).add(1 - dayShift, "days")} room="red" />
-          <DayTimes date={moment(month).add(2 - dayShift, "days")} room="red" />
-          <DayTimes date={moment(month).add(3 - dayShift, "days")} room="red" />
-          <DayTimes date={moment(month).add(4 - dayShift, "days")} room="red" />
-          <DayTimes date={moment(month).add(5 - dayShift, "days")} room="red" />
-        </div>
-
-        <div className="div-room">
-          <div className="room-name">
-            <h3 className="room-color">Синяя</h3>
-            <h3 className="room-sum">(до 25 персон)</h3>
-          </div>
-          <DayTimes
-            date={moment(month).add(1 - dayShift, "days")}
-            room="blue"
-          />
-          <DayTimes
-            date={moment(month).add(2 - dayShift, "days")}
-            room="blue"
-          />
-          <DayTimes
-            date={moment(month).add(3 - dayShift, "days")}
-            room="blue"
-          />
-          <DayTimes
-            date={moment(month).add(4 - dayShift, "days")}
-            room="blue"
-          />
-          <DayTimes
-            date={moment(month).add(5 - dayShift, "days")}
-            room="blue"
-          />
-        </div>
-
-        <div className="div-room">
-          <div className="room-name">
-            <h3 className="room-color">Фиолетовая</h3>
-            <h3 className="room-sum">(до 25 персон)</h3>
-          </div>
-          <DayTimes
-            date={moment(month).add(1 - dayShift, "days")}
-            room="purpure"
-          />
-          <DayTimes
-            date={moment(month).add(2 - dayShift, "days")}
-            room="purpure"
-          />
-          <DayTimes
-            date={moment(month).add(3 - dayShift, "days")}
-            room="purpure"
-          />
-          <DayTimes
-            date={moment(month).add(4 - dayShift, "days")}
-            room="purpure"
-          />
-          <DayTimes
-            date={moment(month).add(5 - dayShift, "days")}
-            room="purpure"
-          />
-        </div>
+        {roomsArr.map(this.roomsBlock)}
       </div>
     );
   }
