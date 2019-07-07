@@ -1,0 +1,10 @@
+header {
+  background-color: orange;
+  height: 40px;
+}
+
+.login-area {
+  display: inline-block;
+  float: right;
+  line-height: 40px;
+}

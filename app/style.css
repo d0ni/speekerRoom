@@ -30,9 +30,15 @@
   width: 150px;
   text-align: center;
   font-size: 14;
+  margin-right: 10px;
 }
 
-.green-room {
+.day-times {
+  margin-right: 10px;
+  margin-bottom: 10px;
+}
+
+.div-room {
   display: flex;
   border: 2px;
 }

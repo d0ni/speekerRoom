@@ -2,31 +2,23 @@ import React, { Component } from "react";
 import moment from "moment";
 
 import DayTimes from "./dayTimes.jsx";
+import Header from "./header.jsx";
+import AccountUI from "./accauntUI.jsx";
 
 require("moment/locale/ru");
 
 export default class App extends Component {
   state = {
     month: moment(),
-    events: [
-      {
-        date: "05.07.2019",
-        room: 1,
-        times: {
-          9: false,
-          10: false,
-          11: false,
-          12: false,
-          13: false,
-          14: false,
-          15: false,
-          16: false,
-          17: false,
-          18: false
-        }
-      }
-    ]
+    isPopup: false,
+    popupType: 1
   };
+
+  componentWillMount() {
+    if (!JSON.parse(localStorage.getItem("events"))) {
+      localStorage.setItem("events", JSON.stringify([]));
+    }
+  }
 
   setEvent = t => () => {};
 
@@ -38,6 +30,20 @@ export default class App extends Component {
     this.setState({ month: moment(this.state.month).add(7, "days") });
   }
 
+  showLoginForm = () => {
+    this.setState({ isPopup: !this.state.isPopup });
+    this.setState({ popupType: 1 });
+  };
+
+  showRegisterForm = () => {
+    this.setState({ isPopup: !this.state.isPopup });
+    this.setState({ popupType: 2 });
+  };
+
+  closePopup = () => {
+    this.setState({ isPopup: !this.state.isPopup });
+  };
+
   render() {
     const { month } = this.state;
 
@@ -45,6 +51,15 @@ export default class App extends Component {
 
     return (
       <div className="main-container">
+        <AccountUI
+          statePopup={this.state.isPopup}
+          typePopup={this.state.popupType}
+          closePopup={this.closePopup}
+        />
+        <Header
+          showLoginForm={this.showLoginForm}
+          showRegisterForm={this.showRegisterForm}
+        />
         <h1>Бронирование переговорок</h1>
         <div className="header">
           <h3 className="room">Комната</h3>
@@ -93,16 +108,97 @@ export default class App extends Component {
             </div>
           </div>
         </div>
-        <div className="green-room">
+        <div className="div-room">
           <div className="room-name">
             <h3 className="room-color">Зеленая</h3>
             <h3 className="room-sum">(до 5 персон)</h3>
           </div>
-          <DayTimes date={moment(month).add(1 - dayShift, "days")} />
-          <DayTimes date={moment(month).add(2 - dayShift, "days")} />
-          <DayTimes date={moment(month).add(3 - dayShift, "days")} />
-          <DayTimes date={moment(month).add(4 - dayShift, "days")} />
-          <DayTimes date={moment(month).add(5 - dayShift, "days")} />
+          <DayTimes
+            date={moment(month).add(1 - dayShift, "days")}
+            room="green"
+          />
+          <DayTimes
+            date={moment(month).add(2 - dayShift, "days")}
+            room="green"
+          />
+          <DayTimes
+            date={moment(month).add(3 - dayShift, "days")}
+            room="green"
+          />
+          <DayTimes
+            date={moment(month).add(4 - dayShift, "days")}
+            room="green"
+          />
+          <DayTimes
+            date={moment(month).add(5 - dayShift, "days")}
+            room="green"
+          />
+        </div>
+
+        <div className="div-room">
+          <div className="room-name">
+            <h3 className="room-color">Красная</h3>
+            <h3 className="room-sum">(до 15 персон)</h3>
+          </div>
+          <DayTimes date={moment(month).add(1 - dayShift, "days")} room="red" />
+          <DayTimes date={moment(month).add(2 - dayShift, "days")} room="red" />
+          <DayTimes date={moment(month).add(3 - dayShift, "days")} room="red" />
+          <DayTimes date={moment(month).add(4 - dayShift, "days")} room="red" />
+          <DayTimes date={moment(month).add(5 - dayShift, "days")} room="red" />
+        </div>
+
+        <div className="div-room">
+          <div className="room-name">
+            <h3 className="room-color">Синяя</h3>
+            <h3 className="room-sum">(до 25 персон)</h3>
+          </div>
+          <DayTimes
+            date={moment(month).add(1 - dayShift, "days")}
+            room="blue"
+          />
+          <DayTimes
+            date={moment(month).add(2 - dayShift, "days")}
+            room="blue"
+          />
+          <DayTimes
+            date={moment(month).add(3 - dayShift, "days")}
+            room="blue"
+          />
+          <DayTimes
+            date={moment(month).add(4 - dayShift, "days")}
+            room="blue"
+          />
+          <DayTimes
+            date={moment(month).add(5 - dayShift, "days")}
+            room="blue"
+          />
+        </div>
+
+        <div className="div-room">
+          <div className="room-name">
+            <h3 className="room-color">Фиолетовая</h3>
+            <h3 className="room-sum">(до 25 персон)</h3>
+          </div>
+          <DayTimes
+            date={moment(month).add(1 - dayShift, "days")}
+            room="purpure"
+          />
+          <DayTimes
+            date={moment(month).add(2 - dayShift, "days")}
+            room="purpure"
+          />
+          <DayTimes
+            date={moment(month).add(3 - dayShift, "days")}
+            room="purpure"
+          />
+          <DayTimes
+            date={moment(month).add(4 - dayShift, "days")}
+            room="purpure"
+          />
+          <DayTimes
+            date={moment(month).add(5 - dayShift, "days")}
+            room="purpure"
+          />
         </div>
       </div>
     );
