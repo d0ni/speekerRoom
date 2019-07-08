@@ -13,33 +13,33 @@ export default class DayTimes extends Component {
       const arr = JSON.parse(localStorage.getItem("events"));
       const date =
         h + this.props.date.format("-DD-MM-YYYY") + "-" + this.props.room;
+      const index = arr.map(this.rtrnBook).indexOf(date);
 
-      const obj = {
-        book: date,
-        userID: Meteor.userId()
-      };
+      const confAdd = `Вы действительно хотите забронировать комнату на ${h}:00 часов в ${this.props.date.format(
+        "dddd DD MMMM YYYY"
+      )}?`;
+      const confDel = `Вы действительно хотите отменить бронировку комнаты c ${h}:00 часов в ${this.props.date.format(
+        "dddd DD MMMM YYYY"
+      )}?`;
 
       if (!arr.map(this.rtrnBook).includes(date)) {
-        if (
-          confirm(`Вы действительно хотите забронировать комнату в ${h}:00?`)
-        ) {
-          arr.push(obj);
+        if (confirm(confAdd)) {
+          arr.push({
+            book: date,
+            userID: Meteor.userId()
+          });
           localStorage.setItem("events", JSON.stringify(arr));
         }
       } else {
-        const index = arr.map(this.rtrnBook).indexOf(date);
-
         if (arr[index].userID == Meteor.userId()) {
-          if (
-            confirm(
-              `Вы действительно хотите снять бронировку комнаты c ${h}:00?`
-            )
-          ) {
+          if (confirm(confDel)) {
             arr.splice(index, 1);
             localStorage.setItem("events", JSON.stringify(arr));
           }
         } else {
-          alert("Снять бронь может только пользователь, который забронировал");
+          alert(
+            "Снять бронь может только тот пользователь, который ее забронировал"
+          );
         }
       }
       this.setState({ x: Math.random() });
@@ -54,7 +54,7 @@ export default class DayTimes extends Component {
 
     return (
       <p key={Math.random()} className="btn-line">
-        <button
+        <div
           className={
             "btn-time " +
             [
@@ -65,9 +65,16 @@ export default class DayTimes extends Component {
           }
           onClick={this.timeClick(value[0])}
         >
-          {value[0] + ":00"}
-        </button>
-        <button
+          <p className="time-text">{" " + value[0] + ":00"}</p>
+          <img
+            src="icons/add.svg"
+            width="18px"
+            hidden={
+              arr.map(this.rtrnBook).includes(value[0] + dmy) ? true : false
+            }
+          />
+        </div>
+        <div
           className={
             "btn-time " +
             [
@@ -78,15 +85,20 @@ export default class DayTimes extends Component {
           }
           onClick={this.timeClick(value[1])}
         >
-          {value[1] + ":00"}
-        </button>
+          <p className="time-text">{" " + value[1] + ":00"}</p>
+          <img
+            src="icons/add.svg"
+            width="18px"
+            hidden={
+              arr.map(this.rtrnBook).includes(value[1] + dmy) ? true : false
+            }
+          />
+        </div>
       </p>
     );
   };
 
   render() {
-    const arr = JSON.parse(localStorage.getItem("events"));
-    const dmy = this.props.date.format("-DD-MM-YYYY") + "-" + this.props.room;
     const timeArr = [
       ["09", "14"],
       ["10", "15"],

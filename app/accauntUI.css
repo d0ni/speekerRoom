@@ -1,11 +1,13 @@
 .b-popup {
-  width: 100%;
+  width: 100vw;
   height: 100vh;
   background-color: rgba(0, 0, 0, 0.5);
   overflow: hidden;
   position: fixed;
   top: 0px;
   z-index: 1;
+  align-items: center;
+  left: 0%;
 }
 .b-popup .b-popup-content {
   position: absolute;
@@ -19,4 +21,12 @@
   border-radius: 5px;
   box-shadow: 0px 0px 10px #000;
   z-index: 100;
+}
+
+.b-popup .b-popup-content p {
+  width: 173px;
+}
+
+.b-popup .b-popup-content p input {
+  width: 169px;
 }

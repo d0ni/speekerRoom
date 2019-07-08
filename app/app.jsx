@@ -20,8 +20,6 @@ export default class App extends Component {
     }
   }
 
-  setEvent = t => () => {};
-
   weekBack() {
     this.setState({ month: moment(this.state.month).add(-7, "days") });
   }

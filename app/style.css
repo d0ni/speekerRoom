@@ -7,35 +7,36 @@
   align-self: center;
 }
 
+.month {
+  display: flex;
+  background: gainsboro;
+}
+
 .curent-month {
-  display: inline-block;
   width: 600px;
   text-align: center;
   margin: auto;
 }
 
 .bnt-change-date {
-  display: inline-block;
   width: 32px;
 }
 
 .week-days {
-  display: inline-block;
+  display: flex;
   margin-top: 10px;
   margin-bottom: 10px;
 }
 
 .days {
   display: inline-block;
-  width: 150px;
+  width: 130px;
   text-align: center;
-  font-size: 14;
   margin-right: 10px;
 }
 
 .day-times {
-  margin-right: 10px;
-  margin-bottom: 10px;
+  margin: 0 5px 10px 5px;
 }
 
 .div-room {
@@ -63,18 +64,20 @@
 }
 
 .btn-time {
-  width: 75px;
+  width: 65px;
   margin: auto;
+  display: flex;
 }
 
 .btn-line {
+  display: flex;
   margin: auto;
 }
 
 .main-container {
   margin-left: auto;
   margin-right: auto;
-  width: auto;
+  /* width: auto; */
 }
 
 .eventOn {
@@ -83,4 +86,8 @@
 
 .eventOff {
   background-color: white;
+}
+
+.time-text {
+  margin: 0px 4px 0px 4px;
 }
