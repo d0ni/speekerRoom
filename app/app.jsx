@@ -117,14 +117,26 @@ export default class App extends Component {
             <div className="month">
               <img
                 className="bnt-change-date"
-                onClick={this.weekBack.bind(this)}
                 src="icons/arrow_back.svg"
+                onClick={this.weekBack.bind(this)}
+                onMouseEnter={() => {
+                  document.body.style.cursor = "pointer";
+                }}
+                onMouseLeave={() => {
+                  document.body.style.cursor = "default";
+                }}
               />
               <h2 className="curent-month">{moment(month).format("MMMM")}</h2>
               <img
                 className="bnt-change-date"
-                onClick={this.weekNext.bind(this)}
                 src="icons/arrow_forward.svg"
+                onClick={this.weekNext.bind(this)}
+                onMouseEnter={() => {
+                  document.body.style.cursor = "pointer";
+                }}
+                onMouseLeave={() => {
+                  document.body.style.cursor = "default";
+                }}
               />
             </div>
             <div className="week-days">{daysArr.map(this.daysBlock)}</div>

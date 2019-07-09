@@ -53,7 +53,7 @@ export default class DayTimes extends Component {
     const dmy = this.props.date.format("-DD-MM-YYYY") + "-" + this.props.room;
 
     return (
-      <p key={Math.random()} className="btn-line">
+      <div key={Math.random()} className="btn-line">
         <div
           className={
             "btn-time " +
@@ -64,6 +64,12 @@ export default class DayTimes extends Component {
             ]
           }
           onClick={this.timeClick(value[0])}
+          onMouseEnter={() => {
+            document.body.style.cursor = "pointer";
+          }}
+          onMouseLeave={() => {
+            document.body.style.cursor = "default";
+          }}
         >
           <p className="time-text">{" " + value[0] + ":00"}</p>
           <img
@@ -84,6 +90,12 @@ export default class DayTimes extends Component {
             ]
           }
           onClick={this.timeClick(value[1])}
+          onMouseEnter={() => {
+            document.body.style.cursor = "pointer";
+          }}
+          onMouseLeave={() => {
+            document.body.style.cursor = "default";
+          }}
         >
           <p className="time-text">{" " + value[1] + ":00"}</p>
           <img
@@ -94,7 +106,7 @@ export default class DayTimes extends Component {
             }
           />
         </div>
-      </p>
+      </div>
     );
   };
 
